@@ -1,0 +1,16 @@
+.navbar{
+    background-color: #EEEEEE;
+    color: black;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.navbar-brand{
+    color: black;
+
+}
+.nav-item{
+    margin-right: 10px;
+    color: black;
+}
