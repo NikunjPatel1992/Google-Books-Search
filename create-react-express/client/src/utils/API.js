@@ -19,5 +19,5 @@ export default {
   },
   getBookSearch: function(query) {
     return axios.get("/api/bookSearch", { params: { q: query } });
-  }
+  }  
 };

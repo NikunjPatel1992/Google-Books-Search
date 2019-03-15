@@ -13,7 +13,7 @@ class BookSearch extends Component {
 
     state = {
         books: [],
-        bookSearch: ""        
+        bookSearch: ""
     }
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -28,20 +28,26 @@ class BookSearch extends Component {
             .catch(err => console.log(err));
     }
 
-    handleSaveSubmit = id => {
-        const book = this.state.books.find(book => book.id === id )
-        console.log(book.id);
+    handleSaveSubmit = id => {        
+        const book = this.state.books.find(book => book.id === id)
+
         API.saveBook({
             googleId: book.id,
-            title: book.volumeInfo.title,            
+            title: book.volumeInfo.title,
             link: book.volumeInfo.infoLink,
             authors: book.volumeInfo.authors,
             description: book.volumeInfo.description,
             image: book.volumeInfo.imageLinks.thumbnail
-          })
-          alert("Book saved");
+        })
+
+        // Filter this.state.friends for friends with an id not equal to the id being removed
+        const books = this.state.books.filter(book => book.id !== id);
+        // Set this.state.friends equal to the new friends array
+        this.setState({ books });
+
     }
-    
+
+
     render() {
         return (
             <Container fluid>
@@ -71,7 +77,7 @@ class BookSearch extends Component {
                                                     <FormBtn
                                                         onClick={this.handleFormSubmit}
                                                         type="success"
-                                                        // className="input-lg"
+                                                    // className="input-lg"
                                                     >
                                                         Search
                                             </FormBtn>
@@ -85,18 +91,18 @@ class BookSearch extends Component {
                                 <Col size="md-12">
                                     {!this.state.books.length ? (
                                         <Card
-                                            cardName="No Book to Display"                                            
+                                            cardName="No Book to Display"
                                         ></Card>
                                     ) : (
                                             <Card
                                                 cardName="Result"
-                                                
+
                                             >
                                                 <List>
                                                     {this.state.books.map(book => {
                                                         return (
                                                             <ListItem
-                                                                key={book.id}                                                                
+                                                                key={book.id}
                                                             >
                                                                 <Container>
                                                                     <Row>
@@ -104,7 +110,7 @@ class BookSearch extends Component {
                                                                             <h3>{book.volumeInfo.title}</h3>
                                                                             <h4>Written By {book.volumeInfo.authors}</h4>
                                                                         </Col>
-                                                                        <Col size="xs-2">                                                                           
+                                                                        <Col size="xs-2">
                                                                             <A
                                                                                 href={book.volumeInfo.infoLink}>
                                                                                 View
@@ -114,7 +120,7 @@ class BookSearch extends Component {
                                                                             <Button
                                                                                 onClick={() => this.handleSaveSubmit(book.id)}
                                                                                 type="success"
-                                                                                
+
                                                                             >
                                                                                 Saved
                                                                             </Button>
@@ -125,7 +131,7 @@ class BookSearch extends Component {
                                                                             <Thumbnail src={book.volumeInfo.imageLinks.thumbnail} />
                                                                         </Col>
                                                                         <Col size="xs-8 sm-9">
-                                                                            <p>{book.volumeInfo.description}</p>                                                                            
+                                                                            <p>{book.volumeInfo.description}</p>
                                                                         </Col>
                                                                     </Row>
                                                                 </Container>
